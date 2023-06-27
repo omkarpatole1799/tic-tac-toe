@@ -1,6 +1,6 @@
 const Box = (props) => {
     return <>
-        <div className={props.className}>
+        <div onClick={props.onClick} className={props.className}>
             {props.value}
         </div>
     </>
