@@ -38,6 +38,9 @@ const Board = () => {
   const isWinner = checkWinner();
 
   const boxClickHandler = index => {
+    if (boxState[index] !== null) {
+      return;
+    }
     const oldState = [...boxState];
     oldState[index] = isXTurn ? 'X' : 'O';
     setBoxState(oldState);
@@ -47,6 +50,7 @@ const Board = () => {
   // reset game
   const playAgainButtonHandler = () => {
     setBoxState(Array(9).fill(null));
+    setIsXTurn(true)
   };
 
   return (
