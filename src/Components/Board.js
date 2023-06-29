@@ -47,7 +47,6 @@ const Board = () => {
   };
 
   const check = checkAllBoxFilled();
-  console.log(!check);
 
   const boxClickHandler = index => {
     if (boxState[index] !== null) {
@@ -132,7 +131,6 @@ const Board = () => {
           </div>
         </>
       )}
-
 
       {!isWinner && !check && (
         <>
