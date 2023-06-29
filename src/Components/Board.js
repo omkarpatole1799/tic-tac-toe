@@ -55,9 +55,10 @@ const Board = () => {
 
   return (
     <>
+      {<h2>Player {isXTurn ? "X" : "O" } turn</h2>}
       <div className="bg-blue-500 w-60 h-60 flex items-center justify-center text-white font-bold text-3xl">
         {!isWinner && (
-          <>
+          <> 
             <div className="">
               <Box
                 value={boxState[0]}
