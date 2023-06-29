@@ -37,6 +37,19 @@ const Board = () => {
 
   const isWinner = checkWinner();
 
+  const checkAllBoxFilled = () => {
+    let isNull = false;
+    for (let i = 0; i < boxState.length; i++) {
+      if (boxState[i] === null) {
+        isNull = true;
+      }
+    }
+    return isNull;
+  };
+
+  const check = checkAllBoxFilled();
+  console.log(!check);
+
   const boxClickHandler = index => {
     if (boxState[index] !== null) {
       return;
@@ -50,15 +63,15 @@ const Board = () => {
   // reset game
   const playAgainButtonHandler = () => {
     setBoxState(Array(9).fill(null));
-    setIsXTurn(true)
+    setIsXTurn(true);
   };
 
   return (
     <>
-      {<h2>Player {isXTurn ? "X" : "O" } turn</h2>}
+      {<h2>Player {isXTurn ? 'X' : 'O'} turn</h2>}
       <div className="bg-blue-500 w-60 h-60 flex items-center justify-center text-white font-bold text-3xl">
         {!isWinner && (
-          <> 
+          <>
             <div className="">
               <Box
                 value={boxState[0]}
@@ -113,7 +126,6 @@ const Board = () => {
           </>
         )}
       </div>
-
       {isWinner && (
         <>
           <h5>{!isXTurn ? 'X' : 'O'} Wins</h5>
@@ -121,6 +133,15 @@ const Board = () => {
             <h4>Game over</h4>
             <Button onClick={playAgainButtonHandler}>Play again!</Button>
           </div>
+        </>
+      )}
+
+      {/* if all boxex filled and no one is winner then reset the game */}
+
+      {!check && (
+        <>
+          <h4>No one win </h4>
+          <Button onClick={playAgainButtonHandler}>Play Again</Button>
         </>
       )}
     </>
