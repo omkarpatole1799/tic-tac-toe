@@ -5,7 +5,6 @@ import Button from './UI/Button';
 const Board = () => {
   const [boxState, setBoxState] = useState(Array(9).fill(null));
   const [isXTurn, setIsXTurn] = useState(true);
-
   const checkWinner = () => {
     const winConditions = [
       // cols
