@@ -1,9 +1,9 @@
 # tic tac toe game
 
-![image](https://github.com/omkarpatole1799/tic-tac-toe/assets/56589966/3985d461-7a17-4cab-9b1d-03dec3677c73)
+![image](https://github.com/omkarpatole1799/tic-tac-toe/assets/56589966/cb1d45f6-9114-4838-b493-7db82d4ec173)
 
+![image](https://github.com/omkarpatole1799/tic-tac-toe/assets/56589966/ab322f0a-0ad4-488f-a3ec-e5b4e8035855)
 
-![image](https://github.com/omkarpatole1799/tic-tac-toe/assets/56589966/39c6950f-608b-4a63-9e6f-f0618d18941f)
+![image](https://github.com/omkarpatole1799/tic-tac-toe/assets/56589966/a018ad9c-7997-4207-86a7-3c036e1d2c9a)
 
-
-![image](https://github.com/omkarpatole1799/tic-tac-toe/assets/56589966/2a367555-31e7-4986-9034-9140c416bf1e)
+![image](https://github.com/omkarpatole1799/tic-tac-toe/assets/56589966/6c22fae1-f07a-4451-98fc-779999242cfa)
