@@ -123,7 +123,7 @@ const Board = () => {
 
   return (
     <>
-      {<h2>{playerMove ? 'Player (X)' : 'Computer (O)'} move</h2>}
+      {!isWinner && <h2>{playerMove ? 'Player (X)' : 'Computer (O)'} move</h2>}
       <div className="bg-blue-500 w-60 h-60 flex items-center justify-center text-white font-bold text-3xl">
         <>
           <div className="">
