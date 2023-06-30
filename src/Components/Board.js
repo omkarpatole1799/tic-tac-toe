@@ -83,28 +83,13 @@ const Board = () => {
     setPlayerMove(true);
   };
 
-  /*
-  // const computerMoveIndex = Math.floor(Math.random() * 9);
-    // console.log(computerMoveIndex);
-
-    // // for (let i = 0; i < emptyBoxIndex.length; i++) {
-    //   // if (emptyBoxIndex[i] != computerMoveIndex) {
-    //   if (emptyBoxIndex.includes(computerMoveIndex)) {
-    //     const oldState = [...boxState];
-    //     oldState[computerMoveIndex] = 'O';
-    //     setBoxState(oldState);
-    //   } else {
-    //     computerTurn();
-    //   }
-    // }*/
-
   // player turn
   const playerTurn = index => {
-    if (isWinner && !check) {
+    if (isWinner && !check && boxState[index] !== null) {
       return;
     }
 
-    if (!isWinner && check) {
+    if (!isWinner && check && boxState[index] === null) {
       const oldState = [...boxState];
       oldState[index] = 'X';
       setBoxState(oldState);
