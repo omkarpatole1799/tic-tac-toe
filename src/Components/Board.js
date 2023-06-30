@@ -62,7 +62,6 @@ const Board = () => {
     return emptyBox;
   };
   const emptyBoxIndexs = checkEmptyBoxIndex();
-  // console.log(emptyBoxIndex);
 
   if (computerMove && !isWinner) {
     setTimeout(() => {
@@ -70,6 +69,7 @@ const Board = () => {
     }, 200);
   }
 
+  // computer turn
   const computerTurn = () => {
     // get number from the remaining boxes
     const randomItem =
@@ -81,8 +81,10 @@ const Board = () => {
 
     setComputerMove(false);
     setPlayerMove(true);
+  };
 
-    // const computerMoveIndex = Math.floor(Math.random() * 9);
+  /*
+  // const computerMoveIndex = Math.floor(Math.random() * 9);
     // console.log(computerMoveIndex);
 
     // // for (let i = 0; i < emptyBoxIndex.length; i++) {
@@ -94,10 +96,10 @@ const Board = () => {
     //   } else {
     //     computerTurn();
     //   }
-    // }
-  };
+    // }*/
 
-  const boxClickHandler = index => {
+  // player turn
+  const playerTurn = index => {
     if (isWinner && !check) {
       return;
     }
@@ -110,26 +112,13 @@ const Board = () => {
       setPlayerMove(false);
       setComputerMove(true);
     }
-
-    // if (boxState[index] !== null) {
-    //   const computerMove = Math.floor(Math.random() * 9 + 1);
-    //   for (let i = 1; i <= boxState.length; i++) {
-    //     if ((boxState[i] === computerMove) !== null) {
-    //       setComputerMove(true);
-    //     }
-    //   }
-    // }
-
-    // const oldState = [...boxState];
-    // oldState[index] = isXTurn ? 'X' : 'O';
-    // setBoxState(oldState);
-    // setPlayerMove(!isXTurn);
   };
 
   // reset game
   const playAgainButtonHandler = () => {
     setBoxState(Array(9).fill(null));
     setPlayerMove(false);
+    setComputerMove(false);
   };
 
   return (
@@ -140,51 +129,51 @@ const Board = () => {
           <div className="">
             <Box
               value={boxState[0]}
-              onClick={boxClickHandler.bind(null, 0)}
+              onClick={playerTurn.bind(null, 0)}
               className="bg-blue-400 w-20 h-20 flex items-center justify-center border-2"
             />
             <Box
               value={boxState[1]}
-              onClick={boxClickHandler.bind(null, 1)}
+              onClick={playerTurn.bind(null, 1)}
               className="bg-blue-400 w-20 h-20 flex items-center justify-center border-2"
             />
             <Box
               value={boxState[2]}
-              onClick={boxClickHandler.bind(null, 2)}
+              onClick={playerTurn.bind(null, 2)}
               className="bg-blue-400 w-20 h-20 flex items-center justify-center border-2"
             />
           </div>
           <div className="">
             <Box
               value={boxState[3]}
-              onClick={boxClickHandler.bind(null, 3)}
+              onClick={playerTurn.bind(null, 3)}
               className="bg-blue-400 w-20 h-20 flex items-center justify-center border-2"
             />
             <Box
               value={boxState[4]}
-              onClick={boxClickHandler.bind(null, 4)}
+              onClick={playerTurn.bind(null, 4)}
               className="bg-blue-400 w-20 h-20 flex items-center justify-center border-2"
             />
             <Box
               value={boxState[5]}
-              onClick={boxClickHandler.bind(null, 5)}
+              onClick={playerTurn.bind(null, 5)}
               className="bg-blue-400 w-20 h-20 flex items-center justify-center border-2"
             />
           </div>
           <div className="">
             <Box
               value={boxState[6]}
-              onClick={boxClickHandler.bind(null, 6)}
+              onClick={playerTurn.bind(null, 6)}
               className="bg-blue-400 w-20 h-20 flex items-center justify-center border-2"
             />
             <Box
               value={boxState[7]}
-              onClick={boxClickHandler.bind(null, 7)}
+              onClick={playerTurn.bind(null, 7)}
               className="bg-blue-400 w-20 h-20 flex items-center justify-center border-2"
             />
             <Box
               value={boxState[8]}
-              onClick={boxClickHandler.bind(null, 8)}
+              onClick={playerTurn.bind(null, 8)}
               className="bg-blue-400 w-20 h-20 flex items-center justify-center border-2"
             />
           </div>
@@ -192,7 +181,7 @@ const Board = () => {
       </div>
       {isWinner && (
         <>
-          {/* <h5>{!isXTurn ? 'X' : 'O'} Wins</h5> */}
+          <h5>{!playerMove ? 'X' : 'O'} Wins</h5>
           <div>
             <h4>Game over</h4>
             <Button onClick={playAgainButtonHandler}>Play again!</Button>
