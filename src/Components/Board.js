@@ -4,7 +4,9 @@ import Button from './UI/Button';
 
 const Board = () => {
   const [boxState, setBoxState] = useState(Array(9).fill(null));
-  const [isXTurn, setIsXTurn] = useState(true);
+  const [playerMove, setPlayerMove] = useState(true);
+  const [computerMove, setComputerMove] = useState(false);
+
   const checkWinner = () => {
     const winConditions = [
       // cols
@@ -36,6 +38,7 @@ const Board = () => {
 
   const isWinner = checkWinner();
 
+  // check if all boxes are marked and if so end the game
   const checkAllBoxFilled = () => {
     let isNull = false;
     for (let i = 0; i < boxState.length; i++) {
@@ -48,25 +51,90 @@ const Board = () => {
 
   const check = checkAllBoxFilled();
 
+  // check empty boxes indexes
+  const checkEmptyBoxIndex = () => {
+    const emptyBox = [];
+    for (let i = 0; i <= boxState.length; i++) {
+      if (boxState[i] === null) {
+        emptyBox.push(i);
+      }
+    }
+    return emptyBox;
+  };
+  const emptyBoxIndexs = checkEmptyBoxIndex();
+  // console.log(emptyBoxIndex);
+
+  if (computerMove && !isWinner) {
+    setTimeout(() => {
+      computerTurn();
+    }, 200);
+  }
+
+  const computerTurn = () => {
+    // get number from the remaining boxes
+    const randomItem =
+      emptyBoxIndexs[Math.floor(Math.random() * emptyBoxIndexs.length)];
+
+    const oldState = [...boxState];
+    oldState[randomItem] = 'O';
+    setBoxState(oldState);
+
+    setComputerMove(false);
+    setPlayerMove(true);
+
+    // const computerMoveIndex = Math.floor(Math.random() * 9);
+    // console.log(computerMoveIndex);
+
+    // // for (let i = 0; i < emptyBoxIndex.length; i++) {
+    //   // if (emptyBoxIndex[i] != computerMoveIndex) {
+    //   if (emptyBoxIndex.includes(computerMoveIndex)) {
+    //     const oldState = [...boxState];
+    //     oldState[computerMoveIndex] = 'O';
+    //     setBoxState(oldState);
+    //   } else {
+    //     computerTurn();
+    //   }
+    // }
+  };
+
   const boxClickHandler = index => {
-    if (boxState[index] !== null) {
+    if (isWinner && !check) {
       return;
     }
-    const oldState = [...boxState];
-    oldState[index] = isXTurn ? 'X' : 'O';
-    setBoxState(oldState);
-    setIsXTurn(!isXTurn);
+
+    if (!isWinner && check) {
+      const oldState = [...boxState];
+      oldState[index] = 'X';
+      setBoxState(oldState);
+
+      setPlayerMove(false);
+      setComputerMove(true);
+    }
+
+    // if (boxState[index] !== null) {
+    //   const computerMove = Math.floor(Math.random() * 9 + 1);
+    //   for (let i = 1; i <= boxState.length; i++) {
+    //     if ((boxState[i] === computerMove) !== null) {
+    //       setComputerMove(true);
+    //     }
+    //   }
+    // }
+
+    // const oldState = [...boxState];
+    // oldState[index] = isXTurn ? 'X' : 'O';
+    // setBoxState(oldState);
+    // setPlayerMove(!isXTurn);
   };
 
   // reset game
   const playAgainButtonHandler = () => {
     setBoxState(Array(9).fill(null));
-    setIsXTurn(true);
+    setPlayerMove(false);
   };
 
   return (
     <>
-      {<h2>Player {isXTurn ? 'X' : 'O'} turn</h2>}
+      {<h2>{!setPlayerMove ? 'Player (X)' : 'Computer (O)'} move</h2>}
       <div className="bg-blue-500 w-60 h-60 flex items-center justify-center text-white font-bold text-3xl">
         <>
           <div className="">
@@ -124,14 +192,13 @@ const Board = () => {
       </div>
       {isWinner && (
         <>
-          <h5>{!isXTurn ? 'X' : 'O'} Wins</h5>
+          {/* <h5>{!isXTurn ? 'X' : 'O'} Wins</h5> */}
           <div>
             <h4>Game over</h4>
             <Button onClick={playAgainButtonHandler}>Play again!</Button>
           </div>
         </>
       )}
-
       {!isWinner && !check && (
         <>
           <h4>No one win </h4>
