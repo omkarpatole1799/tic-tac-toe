@@ -5,8 +5,7 @@ import {Link} from 'react-router-dom';
 
 const Board = () => {
   const [boxState, setBoxState] = useState(Array(9).fill(null));
-  const [playerMove, setPlayerMove] = useState(true);
-  const [computerMove, setComputerMove] = useState(false);
+  const [isXPlaying, setIsXPlaying] = useState(true);
 
   const checkWinner = () => {
     const winConditions = [
@@ -52,39 +51,6 @@ const Board = () => {
 
   const check = checkAllBoxFilled();
 
-  // check empty boxes indexes
-  const checkEmptyBoxIndex = () => {
-    const emptyBox = [];
-    for (let i = 0; i <= boxState.length; i++) {
-      if (boxState[i] === null) {
-        emptyBox.push(i);
-      }
-    }
-    return emptyBox;
-  };
-  const emptyBoxIndexs = checkEmptyBoxIndex();
-
-  if (computerMove && !isWinner) {
-    setTimeout(() => {
-      computerTurn();
-    }, 200);
-  }
-
-  // computer turn
-  const computerTurn = () => {
-    // get number from the remaining boxes
-    const randomItem =
-      emptyBoxIndexs[Math.floor(Math.random() * emptyBoxIndexs.length)];
-
-    const oldState = [...boxState];
-    oldState[randomItem] = 'O';
-    setBoxState(oldState);
-
-    setComputerMove(false);
-    setPlayerMove(true);
-  };
-
-  // player turn
   const playerTurn = index => {
     if (isWinner && !check && boxState[index] !== null) {
       return;
@@ -92,19 +58,16 @@ const Board = () => {
 
     if (!isWinner && check && boxState[index] === null) {
       const oldState = [...boxState];
-      oldState[index] = 'X';
+      oldState[index] = isXPlaying ? 'X' : 'O';
       setBoxState(oldState);
-
-      setPlayerMove(false);
-      setComputerMove(true);
+      setIsXPlaying(!isXPlaying);
     }
   };
 
   // reset game
   const playAgainButtonHandler = () => {
     setBoxState(Array(9).fill(null));
-    setPlayerMove(false);
-    setComputerMove(false);
+    setIsXPlaying(true);
   };
 
   return (
@@ -114,7 +77,7 @@ const Board = () => {
       </Link>
       <h3>Game Mode: Player vs Player</h3>
 
-      {!isWinner && <h2>{playerMove ? 'Player (X)' : 'Computer (O)'} move</h2>}
+      {!isWinner && <h2>{isXPlaying ? 'Player (X)' : 'Player (O)'} move</h2>}
       <div className="bg-blue-500 w-60 h-60 flex items-center justify-center text-white font-bold text-3xl">
         <>
           <div className="">
@@ -172,7 +135,7 @@ const Board = () => {
       </div>
       {isWinner && (
         <>
-          <h5>{!playerMove ? 'X' : 'O'} Wins</h5>
+          <h5>{!isXPlaying ? 'X' : 'O'} Wins</h5>
           <div>
             <h4>Game over</h4>
             <Button onClick={playAgainButtonHandler}>Play again!</Button>
