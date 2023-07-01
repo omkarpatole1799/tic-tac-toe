@@ -1,7 +1,7 @@
-import {useState} from 'react';
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import Box from './Box';
 import Button from './UI/Button';
-import {Link} from 'react-router-dom';
 
 const Board = () => {
   const [boxState, setBoxState] = useState(Array(9).fill(null));
@@ -112,8 +112,8 @@ const Board = () => {
       <Link to="/">
         <Button>Home</Button>
       </Link>
-      <h3>Game Mode: Player vs Player</h3>
 
+      <h3>Game Mode: Player vs Computer</h3>
       {!isWinner && <h2>{playerMove ? 'Player (X)' : 'Computer (O)'} move</h2>}
       <div className="bg-blue-500 w-60 h-60 flex items-center justify-center text-white font-bold text-3xl">
         <>
